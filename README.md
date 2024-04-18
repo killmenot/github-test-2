@@ -32,3 +32,4 @@ meet you and you may call me V... lorem ipsum lorem ipsum
 - feature17
 - feature18
 - bug/patch-1
+- bug/patch-2
