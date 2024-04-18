@@ -34,3 +34,4 @@ meet you and you may call me V... lorem ipsum lorem ipsum
 - bug/patch-1
 - bug/patch-2
 - patch-3
+- hotfix-1
