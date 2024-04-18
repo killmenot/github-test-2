@@ -1,0 +1,22 @@
+{
+  "name": "github-test-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"test\"",
+    "prepare": "husky install",
+    "git:clean:origin": "git fetch -p",
+    "git:clean:local": "git branch --v | grep \"\\[gone\\]\" | awk '{print $1}' | xargs git branch -D",
+    "git:clean": "npm run git:clean:origin && npm run git:clean:local"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^19.2.2",
+    "@commitlint/config-conventional": "^19.2.2",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5"
+  }
+}
