@@ -45,9 +45,8 @@ jobs:
         if: github.event_name == 'pull_request'
         run: npx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
 
-      # TODO:
-      # - name: Validate PR title with commitlint
-      #   if: github.event_name == 'pull_request'
-      #   uses: JulienKode/pull-request-name-linter-action@v0.5.0
+      - name: Validate PR title with commitlint
+        if: github.event_name == 'pull_request'
+        run: echo "${{ github.event.pull_request.title }}" | npx --no-install commitlint --verbose
 
 
