@@ -7,11 +7,6 @@ on:
       - release/**
   pull_request:
     types: [opened, edited]
-    branches:
-      - develop
-      - feature/**
-      - bug/**
-      - hotfix/**
 
 jobs:
   commitlint:
