@@ -14,5 +14,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print github context
-        environment: ${{ env.ENVIRONMENT }}
+        environment: ${{ github.event.action == 'prereleased' && 'staging' || 'production' }}
         run: echo '${{ vars.TEST }}'
