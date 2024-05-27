@@ -12,7 +12,7 @@ env:
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: ${{ github.event.action == 'prereleased' && 'staging' || 'production' }}
     steps:
       - name: Print github context
-        environment: ${{ github.event.action == 'prereleased' && 'staging' || 'production' }}
         run: echo '${{ vars.TEST }}'
