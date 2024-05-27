@@ -12,7 +12,7 @@ env:
 jobs:
   test:
     runs-on: ubuntu-latest
-    environment: ${{ env.ENVIRONMENT }}
     steps:
       - name: Print github context
+        environment: ${{ env.ENVIRONMENT }}
         run: echo '${{ vars.TEST }}'
