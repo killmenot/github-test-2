@@ -4,8 +4,8 @@ on:
   release:
     types: [prereleased, released]
 
-concurrency:
-  cancel-in-progress: false
+# concurrency:
+#   cancel-in-progress: false
 
 env:
   ENVIRONMENT: ${{ github.event.action == 'prereleased' && 'staging' || 'production' }}
