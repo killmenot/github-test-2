@@ -14,16 +14,15 @@ jobs:
   build-and-push:
     name: "Build and push docker image"
     runs-on: ubuntu-latest
-    environment: ${{ env.ENVIRONMENT }}
     steps:
-      - name: Print variables
-        run: echo "${{ toJSON(vars)}}"
+      # - name: Print variables
+      #   run: echo "${{ toJSON(vars)}}"
 
-      - name: Print env
-        run: echo "${{ toJSON(env)}}"
+      # - name: Print env
+      #   run: echo "${{ toJSON(env)}}"
 
-      - name: Print secrets
-        run: echo "${{ toJSON(secrets)}}"
+      # - name: Print secrets
+      #   run: echo "${{ toJSON(secrets)}}"
 
       - name: Checkout repository
         uses: actions/checkout@v4
