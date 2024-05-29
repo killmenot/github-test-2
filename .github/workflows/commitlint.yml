@@ -6,9 +6,6 @@ on:
       - develop
       - release/**
   pull_request:
-    types:
-      - opened
-      - edited
 
 jobs:
   commitlint:
