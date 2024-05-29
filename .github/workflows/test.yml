@@ -1,10 +1,18 @@
 name: Test
 
-on: [push, pull_request, release]
+on: [push]
+
+env:
+  ENVIRONMENT: ${{ github.event.action == 'prereleased' && 'staging' || 'production' }}
+  DOCKER_POSTFIX: ${{ github.event.action == 'prereleased' && '-staging' || '' }}
+  REPO_URL: ghcr.io
+  REPO_PROJECT: swiftdrivecorp
+  REPO_CONFIG: infra-deploy
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: ${{ github.event.action == 'prereleased' && 'staging' || 'production' }}
     steps:
       - name: Print github context
-        run: echo '${{ toJSON(github) }}'
+        run: echo '${{ vars.TEST }}'
