@@ -31,25 +31,33 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Print env 1
+        if: env.ENVIRONMENT == 'staging'
+        run: echo "PRERELEASE"
 
-      - name: Build docker image (environment)
-        run: |
-          docker build -t ghcr.io/killmenot/github-test-${{ env.ENVIRONMENT }}:${{ github.event.release.tag_name }} -f Dockerfile .
-
-      - name: Push docker image to GitHub Container Registry (environment)
-        run: |
-          docker push ghcr.io/killmenot/github-test-${{ env.ENVIRONMENT }}:${{ github.event.release.tag_name }}
-
-      - name: Push docker image to GitHub Container Registry (production > staging)
+      - name: Print env 2
         if: env.ENVIRONMENT == 'production'
-        run: |
-          docker push ghcr.io/killmenot/github-test-staging:${{ github.event.release.tag_name }}
+        run: echo "RELEASE"
+
+      # - name: Login to GitHub Container Registry
+      #   uses: docker/login-action@v3
+      #   with:
+      #     registry: ghcr.io
+      #     username: ${{ github.actor }}
+      #     password: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: Build docker image (environment)
+      #   run: |
+      #     docker build -t ghcr.io/killmenot/github-test-${{ env.ENVIRONMENT }}:${{ github.event.release.tag_name }} -f Dockerfile .
+
+      # - name: Push docker image to GitHub Container Registry (environment)
+      #   run: |
+      #     docker push ghcr.io/killmenot/github-test-${{ env.ENVIRONMENT }}:${{ github.event.release.tag_name }}
+
+      # - name: Push docker image to GitHub Container Registry (production > staging)
+      #   if: env.ENVIRONMENT == 'production'
+      #   run: |
+      #     docker push ghcr.io/killmenot/github-test-staging:${{ github.event.release.tag_name }}
 
 
 
