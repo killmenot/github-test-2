@@ -28,8 +28,12 @@ jobs:
       # - name: Print secrets
       #   run: echo "${{ toJSON(secrets)}}"
 
+      - name: Extract
+        id: extract
+        run: echo service=$(echo "${{ github.event.release.target_commitish }}" | cut -d '/' -f2) >> $GITHUB_OUTPUT
+
       - name: Print vars
-        run: echo "${{ github.event.release.target_commitish }}"
+        run: echo "${{ steps.extract.outputs.service }}"
 
       # - name: Checkout repository
       #   uses: actions/checkout@v4
