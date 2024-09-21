@@ -2,17 +2,16 @@ name: Test
 
 on: [push]
 
-env:
-  ENVIRONMENT: ${{ github.event.action == 'prereleased' && 'staging' || 'production' }}
-  DOCKER_POSTFIX: ${{ github.event.action == 'prereleased' && '-staging' || '' }}
-  REPO_URL: ghcr.io
-  REPO_PROJECT: swiftdrivecorp
-  REPO_CONFIG: infra-deploy
-
 jobs:
-  test:
+  clean:
     runs-on: ubuntu-latest
-    environment: ${{ github.event.action == 'prereleased' && 'staging' || 'production' }}
+    name: Delete old test images
     steps:
-      - name: Print github context
-        run: echo '${{ vars.TEST }}'
+      - uses: snok/container-retention-policy@v3.0.0
+        with:
+          account: killmenot
+          token: ${{ secrets.GITHUB_TOKEN }}
+          image-names: "github-test-staging"
+          image-tags: "*alpha*"
+          # cut-off: 2w 3d
+          dry-run: true
