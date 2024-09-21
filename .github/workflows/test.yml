@@ -2,6 +2,9 @@ name: Test
 
 on: [push]
 
+permissions:
+  packages: write
+
 jobs:
   clean:
     runs-on: ubuntu-latest
@@ -13,5 +16,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           image-names: "github-test-staging"
           image-tags: "*alpha*"
-          # cut-off: 2w 3d
+          cut-off: 1m
           dry-run: true
