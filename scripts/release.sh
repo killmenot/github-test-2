@@ -72,7 +72,13 @@ RELEASE_BRANCH=release/$REGION/$APP_NAME/$ENV
 
 git checkout develop
 git pull origin develop
+
 npm version $VERSION --preid prerelease-id --no-commit-hooks --no-git-tag-version
+TAG=$(jq -r .version package.json)+$1
+TITLE="v$TAG"
+
+git commit -a -m "chore(release): release $TITLE"
+
 git fetch origin $RELEASE_BRANCH:$RELEASE_BRANCH
 git checkout $RELEASE_BRANCH
 git merge develop
@@ -81,16 +87,8 @@ git checkout develop
 git push origin develop
 git branch -D $RELEASE_BRANCH
 
-TAG=$(jq -r .version package.json)+$1
-TITLE="v$TAG"
-
-case "$b" in
- 5) a=$c ;;
- *) a=$d ;;
-esac
-
-echo $TAG
-echo $TITLE
+# echo $TAG
+# echo $TITLE
 
 if [ "$ENV" == "production" ]; then
   gh release create "$TAG" --title $TITLE --target $RELEASE_BRANCH
