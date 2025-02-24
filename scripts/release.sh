@@ -65,8 +65,6 @@ done
 
 set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
 
-# echo "region: $region, env: $env, version: $version, app: $1"
-
 APP_NAME=$1
 RELEASE_BRANCH=release/$REGION/$APP_NAME/$ENV
 
