@@ -91,9 +91,9 @@ git branch -D $RELEASE_BRANCH
 # echo $TITLE
 
 if [ "$ENV" == "production" ]; then
-  gh release create "$TAG" --title $TITLE --target $RELEASE_BRANCH
+  gh release create "$TAG" --title $TITLE --notes "bugfix release" --target $RELEASE_BRANCH
 else
-  gh release create "$TAG" --title $TITLE --target $RELEASE_BRANCH --prerelease
+  gh release create "$TAG" --title $TITLE --notes "bugfix release" --target $RELEASE_BRANCH --prerelease
 fi
 
 
