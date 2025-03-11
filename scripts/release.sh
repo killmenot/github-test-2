@@ -86,8 +86,8 @@ git checkout develop
 git branch -D $RELEASE_BRANCH
 
 if [ "$ENV" == "production" ]; then
-  gh release create "$TAG" --title $TITLE --notes "bugfix release" --target $RELEASE_BRANCH --latest=false
+  gh release create "$TAG" --title $TITLE --notes "release $TITLE" --target $RELEASE_BRANCH --latest=false
 else
-  gh release create "$TAG" --title $TITLE --notes "bugfix release" --target $RELEASE_BRANCH --prerelease --latest=false
+  gh release create "$TAG" --title $TITLE --notes "release $TITLE" --target $RELEASE_BRANCH --prerelease --latest=false
 fi
 
