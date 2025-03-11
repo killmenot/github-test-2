@@ -71,15 +71,16 @@ RELEASE_BRANCH=release/$REGION/$APP_NAME/$ENV
 git checkout develop
 git pull origin develop
 
+git fetch origin $RELEASE_BRANCH:$RELEASE_BRANCH
+git checkout $RELEASE_BRANCH
+git merge develop
+
 npm version $VERSION --preid $PRE_ID --no-commit-hooks --no-git-tag-version
 TAG=$(jq -r .version package.json)+$1
 TITLE="v$TAG"
 
 git commit -a -m "chore(release): release $TITLE"
 
-git fetch origin $RELEASE_BRANCH:$RELEASE_BRANCH
-git checkout $RELEASE_BRANCH
-git merge develop
 git push origin $RELEASE_BRANCH
 git checkout develop
 git branch -D $RELEASE_BRANCH
