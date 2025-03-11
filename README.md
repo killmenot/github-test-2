@@ -12,6 +12,7 @@ meet you and you may call me V... lorem ipsum lorem ipsum
 
 ### Features
 
+- feature0
 - feature1
 - feature2
 - hotfix1
