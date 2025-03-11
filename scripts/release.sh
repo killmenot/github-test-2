@@ -29,7 +29,7 @@
 REGION=ru
 ENV=staging
 VERSION=patch
-PRE=
+PRE_ID=
 APP_NAME=
 
 POSITIONAL_ARGS=()
@@ -48,8 +48,8 @@ while [[ $# -gt 0 ]]; do
       VERSION="$2"
       shift 2
       ;;
-    --preid)
-      PRE="$2"
+    --pre-id)
+      PRE_ID="$2"
       shift 2
       ;;
     -*|--*)
@@ -70,41 +70,23 @@ RELEASE_BRANCH=release/$REGION/$APP_NAME/$ENV
 
 git checkout develop
 git pull origin develop
+git fetch origin $RELEASE_BRANCH:$RELEASE_BRANCH
+git checkout $RELEASE_BRANCH
+git merge develop
 
-npm version $VERSION --preid prerelease-id --no-commit-hooks --no-git-tag-version
+npm version $VERSION --preid $PRE_ID --no-commit-hooks --no-git-tag-version
 TAG=$(jq -r .version package.json)+$1
 TITLE="v$TAG"
 
 git commit -a -m "chore(release): release $TITLE"
 
-git fetch origin $RELEASE_BRANCH:$RELEASE_BRANCH
-git checkout $RELEASE_BRANCH
-git merge develop
 git push origin $RELEASE_BRANCH
 git checkout develop
-git push origin develop
 git branch -D $RELEASE_BRANCH
 
-# echo $TAG
-# echo $TITLE
-
 if [ "$ENV" == "production" ]; then
-  gh release create "$TAG" --title $TITLE --notes "bugfix release" --target $RELEASE_BRANCH
+  gh release create "$TAG" --title $TITLE --notes "bugfix release" --target $RELEASE_BRANCH --latest=false
 else
-  gh release create "$TAG" --title $TITLE --notes "bugfix release" --target $RELEASE_BRANCH --prerelease
+  gh release create "$TAG" --title $TITLE --notes "bugfix release" --target $RELEASE_BRANCH --prerelease --latest=false
 fi
-
-
-
-
-
-#  ./scripts/release.sh --region fr --env production --version minor maps-api
-#  ./scripts/release.sh --env=prod121212maps-api
-
-# ./scripts/release.sh --region ru --env production --version minor maps-api
-
-
-
-
-
 
