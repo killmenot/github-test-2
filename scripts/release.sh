@@ -73,7 +73,7 @@ git pull origin develop
 
 git fetch origin $RELEASE_BRANCH:$RELEASE_BRANCH
 git checkout $RELEASE_BRANCH
-git merge develop
+git merge develop --no-edit
 
 npm version $VERSION --preid $PRE_ID --no-commit-hooks --no-git-tag-version
 TAG=$(jq -r .version package.json)+$1
