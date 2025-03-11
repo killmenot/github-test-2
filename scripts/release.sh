@@ -68,7 +68,7 @@ set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
 APP_NAME=$1
 RELEASE_BRANCH=release/$REGION/$APP_NAME/$ENV
 
-git checkout develop
+git checkout develop || exit 1
 git pull origin develop
 
 git fetch origin $RELEASE_BRANCH:$RELEASE_BRANCH
