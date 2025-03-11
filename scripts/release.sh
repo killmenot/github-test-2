@@ -70,6 +70,7 @@ RELEASE_BRANCH=release/$REGION/$APP_NAME/$ENV
 
 git checkout develop
 git pull origin develop
+
 git fetch origin $RELEASE_BRANCH:$RELEASE_BRANCH
 git checkout $RELEASE_BRANCH
 git merge develop
