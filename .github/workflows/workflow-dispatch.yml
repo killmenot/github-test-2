@@ -19,4 +19,7 @@ jobs:
       - name: my-step
         run: echo "Hello World!"
       - name: print inputs
-        run: echo "${{ fromJSON(inputs) }}"
+        run: |
+          INPUTS_JSON=$(echo '${{ toJSON(inputs) }}')
+
+          echo "$INPUTS_JSON"
