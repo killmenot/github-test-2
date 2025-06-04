@@ -32,7 +32,7 @@ jobs:
           ref_name: ${{ github.ref_name }}
           fetch-depth: 0
 
-        name: Find affected apps
+      - name: Release
         run: |
           npm --prefix version ${{ input.version }} --preid alpha --no-commit-hooks --no-git-tag-version
           VERSION=$(jq -r .version package.json)
