@@ -1,8 +1,22 @@
 name: workflow-dispatch
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      region:
+        description: 'Region'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - fr
+          - ru
+
 jobs:
   my-job:
     runs-on: ubuntu-latest
     steps:
       - name: my-step
         run: echo "Hello World!"
+      - name: print inputs
+        run: echo "${{ fromJSON(inputs) }}"
