@@ -11,6 +11,11 @@ on:
           - all
           - fr
           - ru
+      environment:
+        description: 'Environment'
+        required: true
+        default: 'staging'
+        type: environment
 
 jobs:
   my-job:
@@ -27,3 +32,7 @@ jobs:
         run: |
           GITHUB_JSON=$(echo '${{ toJSON(github) }}')
           echo "$GITHUB_JSON"
+
+      - name: print vars
+        run: |
+          echo '${{ toJSON(vars) }}'
