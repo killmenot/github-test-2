@@ -21,5 +21,9 @@ jobs:
       - name: print inputs
         run: |
           INPUTS_JSON=$(echo '${{ toJSON(inputs) }}')
-
           echo "$INPUTS_JSON"
+
+      - name: print github
+        run: |
+          GITHUB_JSON=$(echo '${{ toJSON(github) }}')
+          echo "$GITHUB_JSON"
