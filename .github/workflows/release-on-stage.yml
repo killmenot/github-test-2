@@ -34,7 +34,7 @@ jobs:
 
       - name: Release
         run: |
-          npm --prefix version ${{ input.version }} --preid alpha --no-commit-hooks --no-git-tag-version
+          npm --prefix version ${{ inputs.version }} --preid alpha --no-commit-hooks --no-git-tag-version
           VERSION=$(jq -r .version package.json)
           git cherry -v develop
 
