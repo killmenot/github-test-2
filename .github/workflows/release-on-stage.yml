@@ -1,0 +1,61 @@
+name: Release on Stage
+
+on:
+  workflow_dispatch:
+    inputs:
+      region:
+        description: 'Region'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - fr
+          - ru
+      version:
+        description: 'Version'
+        required: true
+        default: 'preminor'
+        type: choice
+        options:
+          - premajor
+          - preminor
+          - prepatch
+          - prerelease
+
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref_name: ${{ github.ref_name }}
+          fetch-depth: 0
+
+        name: Find affected apps
+        run: |
+          npm --prefix version ${{ input.version }} --preid alpha --no-commit-hooks --no-git-tag-version
+          VERSION=$(jq -r .version package.json)
+          git cherry -v develop
+
+          git reset --hard HEAD~1
+          git cherry -v develop
+
+          git commit -a -m "chore: release $VERSION"
+          git cherry -v develop
+
+          git push origin ${{ github.ref_name }}
+
+      # - name: print inputs
+      #   run: |
+      #     INPUTS_JSON=$(echo '${{ toJSON(inputs) }}')
+      #     echo "$INPUTS_JSON"
+
+      # - name: print github
+      #   run: |
+      #     GITHUB_JSON=$(echo '${{ toJSON(github) }}')
+      #     echo "$GITHUB_JSON"
+
+      # - name: print vars
+      #   run: |
+      #     echo '${{ toJSON(vars) }}'
