@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref_name: ${{ github.ref_name }}
-          fetch-depth: 0
+          # fetch-depth: 0
 
       - name: Release
         run: |
