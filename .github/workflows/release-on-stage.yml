@@ -40,7 +40,7 @@ jobs:
           VERSION=$(jq -r .version package.json)
           git cherry -v develop
 
-          # git reset --hard HEAD~1
+          git reset --hard HEAD~1
           # git cherry -v develop
 
           # git commit -a -m "chore: release $VERSION"
