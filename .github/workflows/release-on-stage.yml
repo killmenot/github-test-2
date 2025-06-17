@@ -40,13 +40,13 @@ jobs:
           VERSION=$(jq -r .version package.json)
           git cherry -v develop
 
-          # git reset --hard HEAD~1
-          # git cherry -v develop
+          git reset --hard HEAD~1
+          git cherry -v develop
 
-          # git commit -a -m "chore: release $VERSION"
-          # git cherry -v develop
+          git commit -a -m "chore: release $VERSION"
+          git cherry -v develop
 
-          # git push origin ${{ github.ref_name }}
+          git push origin ${{ github.ref_name }}
 
       # - name: print inputs
       #   run: |
