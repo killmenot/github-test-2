@@ -38,7 +38,7 @@ jobs:
 
           # npm version ${{ inputs.version }} --preid alpha --no-commit-hooks --no-git-tag-version
           # VERSION=$(jq -r .version package.json)
-          git cherry -v develop
+          # git cherry -v develop
 
           # git reset --hard HEAD~1
           # git cherry -v develop
