@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
-          # fetch-depth: 0
+          fetch-depth: 0
 
       - name: Release
         run: |
@@ -38,10 +38,6 @@ jobs:
 
           npm version ${{ inputs.version }} --preid alpha --no-commit-hooks --no-git-tag-version
           VERSION=$(jq -r .version package.json)
-          git cherry -v develop
-
-          git reset --hard HEAD
-          git cherry -v develop
 
           git commit -a -m "chore: release $VERSION"
           git cherry -v develop
