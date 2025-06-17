@@ -36,8 +36,8 @@ jobs:
         run: |
           git config --global user.email ci-bot@argocd.com && git config --global user.name ci-bot
 
-          # npm version ${{ inputs.version }} --preid alpha --no-commit-hooks --no-git-tag-version
-          # VERSION=$(jq -r .version package.json)
+          npm version ${{ inputs.version }} --preid alpha --no-commit-hooks --no-git-tag-version
+          VERSION=$(jq -r .version package.json)
           git cherry -v develop
 
           # git reset --hard HEAD~1
